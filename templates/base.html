@@ -115,19 +115,16 @@
                     <a href="#" class="notification dropdown-toggle" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="true">
                         <span><i class='fa fa-bell'></i></span>
-                        <span class="badge" id="notification-badge">0</span>
+                        <span class="badge" id="notification-badge">{{notification_count}}</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="notifications-dropdown"
                         data-popper-placement="bottom-end"
                         style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(-70px, 42px, 0px);">
 
-                        <!-- {% for i in notifications %}
-                        <li class="dropdown-item">{{i.message}}</li>
-                        <hr class="dropdown-divider">
+                        {% for notification in notifications %}
+                            <li class="dropdown-item">{{notification.message}}</li>
+                            <hr class="dropdown-divider">
                         {% endfor %}
-                        {% comment %} 
-                        <hr class="dropdown-divider"> {% endcomment %} -->
-                        <li class='dropdown-item'>Hello</li>
 
                     </ul>
                 </li>
@@ -175,6 +172,7 @@
             const data = JSON.parse(e.data)
             //document.querySelector('#chat-log').value += (data.message + '\n');
             console.log(data.message);
+            console.log('not parsed data come from backend ', e.data)
             document.getElementById("notifications-dropdown").innerHTML = "<li class='dropdown-item'>" + data.message + "</li><hr class='dropdown-divider'>" + document.getElementById("notifications-dropdown").innerHTML;
             document.getElementById("notification-badge").innerHTML = parseInt(document.getElementById("notification-badge").innerHTML) + 1;
         };

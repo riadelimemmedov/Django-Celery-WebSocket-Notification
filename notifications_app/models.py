@@ -21,6 +21,7 @@ class BroadcastNotification(models.Model):
         ordering = ['-broadcast_on']
         verbose_name = 'BroadcastNotification'
         verbose_name_plural = 'BroadcastNotifications'
+        
 #?Create BroadcastNotification With Django Signals
 @receiver(post_save,sender=BroadcastNotification)
 def notification_handler(sender,instance,created,**kwargs):

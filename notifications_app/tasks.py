@@ -15,17 +15,18 @@ def broadcast_notification(self,data):
     try:
         notification = BroadcastNotification.objects.filter(id=int(data))
         if len(notification)>0:
+            print('noldu amk notification ', notification )
             notification = notification.first()
             channel_layer = get_channel_layer()
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
-            loop.run_until_complete(channel_layer.group_send((
+            loop.run_until_complete(channel_layer.group_send(
                 "notificationbroadcast",
                 {
                     'type':'send_notification',
                     'message': json.dumps(notification.message)
                 }
-            )))
+            ))
             notification.send = True
             notification.save()
             return 'Done'
